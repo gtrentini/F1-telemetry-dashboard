@@ -1,3 +1,5 @@
+[https://adorable-meerkat-ecf728.netlify.app/](https://adorable-meerkat-ecf728.netlify.app/)
+
 A web-based Formula 1 and motorsport telemetry visualizer built with React, TypeScript, and HTML5 Canvas. The application ingests real timing and car dynamics data from the OpenF1 API to compare lap performance between drivers across speed, pedal inputs, and spatial circuit positions.
 
 ## Features
