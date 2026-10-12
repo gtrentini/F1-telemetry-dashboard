@@ -1,0 +1,150 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.sectorPanel {
+  @include panel-frame;
+  width: 100%;
+}
+
+.sectorHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  background: $bg-panel-subtle;
+  border-bottom: 1px solid $border-panel;
+
+  .titleGroup {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: $text-primary;
+    }
+
+    .badge {
+      font-family: $font-mono;
+      font-size: 0.62rem;
+      font-weight: 600;
+      padding: 2px 6px;
+      background: rgba($trace-delta, 0.1);
+      color: $trace-delta;
+      border: 1px solid rgba($trace-delta, 0.25);
+      border-radius: $border-radius-sm;
+    }
+  }
+
+  .meta {
+    font-size: 0.68rem;
+    font-family: $font-mono;
+    color: $text-secondary;
+  }
+}
+
+.tableWrapper {
+  @include ultra-thin-scrollbar;
+  overflow-x: auto;
+}
+
+.sectorTable {
+  @include no-wrap-data-table;
+
+  tbody tr {
+    transition: background-color 0.15s ease;
+
+    &.activeSector {
+      background: rgba($trace-reference, 0.08);
+
+      td {
+        border-bottom-color: rgba($trace-reference, 0.3);
+      }
+    }
+
+    &.totalRow {
+      background: $bg-panel-subtle;
+      font-weight: 700;
+
+      td {
+        border-top: 1px solid $border-panel;
+        border-bottom: none;
+      }
+    }
+  }
+
+  .sectorNameCell {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    .sectorPill {
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 1px 5px;
+      border-radius: 2px;
+      text-transform: uppercase;
+
+      &.s1 {
+        background: rgba(#38bdf8, 0.15);
+        color: #38bdf8;
+        border: 1px solid rgba(#38bdf8, 0.3);
+      }
+
+      &.s2 {
+        background: rgba(#a855f7, 0.15);
+        color: #a855f7;
+        border: 1px solid rgba(#a855f7, 0.3);
+      }
+
+      &.s3 {
+        background: rgba(#34d399, 0.15);
+        color: #34d399;
+        border: 1px solid rgba(#34d399, 0.3);
+      }
+
+      &.total {
+        background: rgba($trace-delta, 0.15);
+        color: $trace-delta;
+        border: 1px solid rgba($trace-delta, 0.3);
+      }
+    }
+
+    .nameText {
+      font-family: $font-sans;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: $text-primary;
+    }
+  }
+
+  .refTime {
+    color: $trace-reference;
+    font-weight: 600;
+  }
+
+  .tgtTime {
+    color: $trace-target;
+    font-weight: 600;
+  }
+
+  .deltaCell {
+    font-weight: 700;
+
+    &.slower {
+      color: $status-slower;
+    }
+
+    &.faster {
+      color: $status-faster;
+    }
+  }
+
+  .speedCell {
+    font-weight: 600;
+    color: $text-secondary;
+  }
+}

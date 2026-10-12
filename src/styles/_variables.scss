@@ -1,0 +1,44 @@
+// ==========================================
+// ApexTrace Telemetry Palette & Theme Variables
+// ==========================================
+
+// Surfaces & Backgrounds
+$bg-primary: #0a0c10;          // Deep matte obsidian
+$bg-panel: #0e1219;            // Elevated panel background
+$bg-panel-subtle: #121722;     // Recessed / card surface
+$bg-hover: #171d2b;            // Row / item interactive hover
+
+// Borders & Structural Grid
+$border-panel: #1b1f2b;        // Panel outer and sectional borders
+$border-subtle: #141824;       // Internal dividers
+$grid-line: #161b26;           // Telemetry plot / graph grid lines
+
+// Telemetry Traces
+$trace-reference: #00f0ff;     // Lap 1: High-vis cyan
+$trace-target: #ff3864;        // Lap 2: Aggressive crimson
+$trace-delta: #e0b0ff;         // Micro-sector delta: Lavender purple
+
+// Channel Indicators
+$channel-throttle: #00e676;    // Throttle trace & readout (pure racing green)
+$channel-brake: #ff1744;       // Brake pressure & threshold readout (signal red)
+$channel-clutch: #ffea00;       // Auxiliary channel yellow
+$channel-neutral: #8492a6;      // Neutral channel gray
+
+// Typography Colors
+$text-primary: #e6edf3;        // Crisp primary metric text
+$text-secondary: #8b949e;      // Secondary technical labels
+$text-muted: #484f58;          // De-emphasized indicators
+$text-highlight: #ffffff;      // Apex points & maximums
+
+// Status & Deltas
+$status-faster: #00e676;       // Negative delta (time gained)
+$status-slower: #ff1744;       // Positive delta (time lost)
+
+// Typography Stacks
+$font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+$font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', Menlo, Consolas, Monaco, monospace;
+
+// Layout Metrics
+$header-height: 58px;
+$border-radius-sm: 3px;
+$border-radius-md: 6px;

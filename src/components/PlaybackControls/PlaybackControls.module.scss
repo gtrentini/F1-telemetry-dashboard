@@ -1,0 +1,166 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.transportBar {
+  @include panel-frame;
+  display: flex;
+  flex-direction: column;
+  background: $bg-panel-subtle;
+  border-top: 1px solid $border-panel;
+  padding: 10px 16px;
+  gap: 10px;
+}
+
+.timelineRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  .timelineTrack {
+    position: relative;
+    flex: 1;
+    height: 10px;
+    background: $bg-primary;
+    border: 1px solid $border-panel;
+    border-radius: 4px;
+    cursor: pointer;
+    overflow: hidden;
+
+    .timelineFill {
+      height: 100%;
+      background: linear-gradient(90deg, #00f0ff, #00e676);
+      box-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
+      border-radius: 3px;
+      transition: width 0.05s linear;
+    }
+
+    .sectorMarkerLines {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: rgba(255, 255, 255, 0.25);
+      pointer-events: none;
+    }
+  }
+
+  .distanceReadout {
+    font-family: $font-mono;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: $text-primary;
+    min-width: 130px;
+    text-align: right;
+
+    .totalDist {
+      color: $text-secondary;
+      font-weight: 400;
+    }
+  }
+}
+
+.controlsRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .playbackGroup {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    .ctrlBtn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 5px 12px;
+      background: $bg-panel;
+      border: 1px solid $border-panel;
+      border-radius: $border-radius-sm;
+      color: $text-primary;
+      font-family: $font-sans;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+
+      &:hover {
+        background: $bg-hover;
+        border-color: rgba($trace-reference, 0.4);
+      }
+
+      &.primaryPlay {
+        background: rgba($trace-reference, 0.12);
+        border-color: rgba($trace-reference, 0.4);
+        color: $trace-reference;
+        min-width: 80px;
+
+        &:hover {
+          background: rgba($trace-reference, 0.2);
+          box-shadow: 0 0 10px rgba($trace-reference, 0.3);
+        }
+      }
+
+      .btnIcon {
+        font-size: 0.85rem;
+        line-height: 1;
+      }
+    }
+  }
+
+  .speedGroup {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    .speedLabel {
+      font-size: 0.68rem;
+      font-family: $font-sans;
+      color: $text-secondary;
+      text-transform: uppercase;
+      margin-right: 4px;
+    }
+
+    .speedBtn {
+      padding: 4px 8px;
+      background: $bg-panel;
+      border: 1px solid $border-panel;
+      border-radius: $border-radius-sm;
+      color: $text-secondary;
+      font-family: $font-mono;
+      font-size: 0.72rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+
+      &:hover {
+        background: $bg-hover;
+        color: $text-primary;
+      }
+
+      &.activeSpeed {
+        background: rgba($trace-delta, 0.15);
+        border-color: rgba($trace-delta, 0.4);
+        color: $trace-delta;
+      }
+    }
+  }
+
+  .hotkeyHints {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.65rem;
+    font-family: $font-mono;
+    color: $text-muted;
+
+    kbd {
+      padding: 2px 5px;
+      background: $bg-primary;
+      border: 1px solid $border-panel;
+      border-radius: 2px;
+      color: $text-secondary;
+    }
+  }
+}

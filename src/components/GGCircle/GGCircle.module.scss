@@ -1,0 +1,103 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.ggPanel {
+  @include panel-frame;
+  position: relative;
+  width: 100%;
+}
+
+.ggHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  background: $bg-panel-subtle;
+  border-bottom: 1px solid $border-panel;
+
+  .titleGroup {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: $text-primary;
+    }
+
+    .badge {
+      font-family: $font-mono;
+      font-size: 0.62rem;
+      font-weight: 600;
+      padding: 2px 6px;
+      background: rgba($trace-reference, 0.1);
+      color: $trace-reference;
+      border: 1px solid rgba($trace-reference, 0.25);
+      border-radius: $border-radius-sm;
+    }
+  }
+
+  .readoutG {
+    font-family: $font-mono;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: $text-primary;
+
+    .totalG {
+      color: $trace-reference;
+    }
+  }
+}
+
+.canvasWrapper {
+  position: relative;
+  width: 100%;
+  height: 290px;
+  background: $bg-panel;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
+  canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.ggFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 14px;
+  background: rgba(14, 18, 25, 0.9);
+  border-top: 1px solid $border-subtle;
+  font-size: 0.68rem;
+  font-family: $font-mono;
+  color: $text-secondary;
+
+  .metricItem {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+
+    .valBrake {
+      color: $channel-brake;
+      font-weight: 700;
+    }
+
+    .valAccel {
+      color: $channel-throttle;
+      font-weight: 700;
+    }
+
+    .valLat {
+      color: $trace-reference;
+      font-weight: 700;
+    }
+  }
+}

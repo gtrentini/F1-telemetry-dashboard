@@ -1,0 +1,540 @@
+@use './styles/variables' as *;
+@use './styles/mixins' as *;
+
+.workstation {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: $bg-primary;
+  color: $text-primary;
+  font-family: $font-sans;
+}
+
+// ==========================================
+// Dense Telemetry Header
+// ==========================================
+.telemetryHeader {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: $header-height;
+  padding: 0 24px;
+  background: rgba(14, 18, 25, 0.96);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid $border-panel;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+
+  .brandSection {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    .brandBadge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 8px;
+      background: rgba($trace-reference, 0.08);
+      border: 1px solid rgba($trace-reference, 0.25);
+      border-radius: $border-radius-sm;
+
+      .brandLogoPulse {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: $trace-reference;
+        box-shadow: 0 0 10px $trace-reference;
+      }
+
+      .brandName {
+        font-family: $font-sans;
+        font-weight: 800;
+        font-size: 0.85rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: $text-highlight;
+      }
+    }
+
+    .sessionMeta {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+
+      .titleWithBadge {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .badgeDemo {
+        display: inline-flex;
+        align-items: center;
+        padding: 1px 6px;
+        border-radius: 4px;
+        font-family: $font-mono;
+        font-size: 0.65rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #ffab00;
+        background: rgba(255, 171, 0, 0.12);
+        border: 1px solid rgba(255, 171, 0, 0.5);
+        box-shadow: 0 0 10px rgba(255, 171, 0, 0.4);
+      }
+
+      .badgeLive {
+        display: inline-flex;
+        align-items: center;
+        padding: 1px 6px;
+        border-radius: 4px;
+        font-family: $font-mono;
+        font-size: 0.65rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #00f0ff;
+        background: rgba(0, 240, 255, 0.12);
+        border: 1px solid rgba(0, 240, 255, 0.5);
+        box-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
+      }
+
+      .trackTitle {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: $text-primary;
+        letter-spacing: 0.02em;
+      }
+
+      .carTitle {
+        font-size: 0.72rem;
+        font-weight: 500;
+        color: $text-secondary;
+        font-family: $font-mono;
+      }
+    }
+
+    .cockpitStatusLive {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 3px 9px;
+      border-radius: 4px;
+      background: rgba(0, 240, 255, 0.08);
+      border: 1px solid rgba(0, 240, 255, 0.45);
+      box-shadow: 0 0 12px rgba(0, 240, 255, 0.25);
+      flex-shrink: 0;
+
+      .pulseDotLive {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background-color: #00f0ff;
+        box-shadow: 0 0 8px #00f0ff;
+        animation: statusPulse 1.8s infinite ease-in-out;
+      }
+
+      .statusPillLabel {
+        font-family: $font-mono;
+        font-size: 0.65rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #00f0ff;
+      }
+
+      .teamBadges {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        margin-left: 2px;
+        padding-left: 7px;
+        border-left: 1px solid rgba(0, 240, 255, 0.25);
+
+        .driverTag {
+          font-family: $font-mono;
+          font-size: 0.65rem;
+          font-weight: 800;
+          letter-spacing: 0.06em;
+          padding: 1px 5px;
+          border-radius: 3px;
+          background: rgba(0, 0, 0, 0.45);
+          border: 1px solid currentColor;
+        }
+
+        .vsSeparator {
+          font-family: $font-mono;
+          font-size: 0.6rem;
+          font-weight: 600;
+          color: $text-muted;
+          text-transform: lowercase;
+        }
+      }
+    }
+
+    .cockpitStatusDemo {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 3px 9px;
+      border-radius: 4px;
+      background: rgba(255, 171, 0, 0.08);
+      border: 1px solid rgba(255, 171, 0, 0.45);
+      box-shadow: 0 0 12px rgba(255, 171, 0, 0.2);
+      flex-shrink: 0;
+
+      .pulseDotDemo {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background-color: #ffab00;
+        box-shadow: 0 0 8px #ffab00;
+      }
+
+      .statusPillLabel {
+        font-family: $font-mono;
+        font-size: 0.65rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #ffab00;
+      }
+    }
+  }
+
+  .metricsSection {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+}
+
+@keyframes statusPulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.35;
+    transform: scale(0.85);
+  }
+}
+
+// Telemetry Metric Readout Badges
+.readoutBox {
+  @include telemetry-readout;
+  min-width: 108px;
+
+  &.refLap {
+    border-color: rgba($trace-reference, 0.4);
+    background: rgba($trace-reference, 0.04);
+
+    .readoutLabel {
+      color: $trace-reference;
+    }
+
+    .readoutValue {
+      color: $trace-reference;
+    }
+  }
+
+  &.compLap {
+    border-color: rgba($trace-target, 0.4);
+    background: rgba($trace-target, 0.04);
+
+    .readoutLabel {
+      color: $trace-target;
+    }
+
+    .readoutValue {
+      color: $trace-target;
+    }
+  }
+
+  &.deltaBox {
+    border-color: rgba($trace-delta, 0.4);
+    background: rgba($trace-delta, 0.04);
+
+    .readoutLabel {
+      color: $trace-delta;
+    }
+
+    .readoutValue {
+      &.slower {
+        color: $status-slower;
+      }
+      &.faster {
+        color: $status-faster;
+      }
+    }
+  }
+}
+
+.readoutLabel {
+  font-family: $font-sans;
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: $text-secondary;
+  margin-bottom: 2px;
+}
+
+.readoutValue {
+  font-family: $font-mono;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: $text-primary;
+  font-variant-numeric: tabular-nums;
+}
+
+// ==========================================
+// Main Workbench Container & Split Layout
+// ==========================================
+.workbench {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 24px;
+  gap: 20px;
+}
+
+.splitLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(360px, 1fr);
+  gap: 20px;
+  align-items: stretch;
+
+  @media (max-width: 1200px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.leftColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+}
+
+.rightColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+}
+
+.mapAndGgRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(240px, 1fr);
+  gap: 16px;
+
+  @media (max-width: 1400px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// Subheader / Overview Grid
+.overviewGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.sectorCard {
+  @include panel-frame;
+  padding: 14px 16px;
+
+  .sectorHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid $border-subtle;
+
+    .sectorTitle {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: $text-secondary;
+    }
+
+    .sectorMarker {
+      font-family: $font-mono;
+      font-size: 0.72rem;
+      color: $text-muted;
+    }
+  }
+
+  .sectorSplits {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+    text-align: center;
+
+    .splitItem {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+
+      .splitLabel {
+        font-size: 0.6rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: $text-secondary;
+      }
+
+      .splitValue {
+        font-family: $font-mono;
+        font-size: 0.85rem;
+        font-weight: 600;
+        font-variant-numeric: tabular-nums;
+
+        &.lap1 {
+          color: $trace-reference;
+        }
+
+        &.lap2 {
+          color: $trace-target;
+        }
+
+        &.slower {
+          color: $status-slower;
+        }
+
+        &.faster {
+          color: $status-faster;
+        }
+      }
+    }
+  }
+}
+
+// ==========================================
+// Diagnostic Table Section
+// ==========================================
+.panelContainer {
+  @include panel-frame;
+  flex: 1;
+
+  .panelHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 18px;
+    background: $bg-panel-subtle;
+    border-bottom: 1px solid $border-panel;
+
+    .panelTitleGroup {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      .panelTitle {
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: $text-primary;
+      }
+
+      .badgeStatus {
+        font-size: 0.65rem;
+        font-family: $font-mono;
+        font-weight: 600;
+        padding: 2px 6px;
+        background: rgba($status-faster, 0.12);
+        color: $status-faster;
+        border: 1px solid rgba($status-faster, 0.3);
+        border-radius: $border-radius-sm;
+      }
+    }
+
+    .panelMeta {
+      font-size: 0.7rem;
+      font-family: $font-mono;
+      color: $text-secondary;
+    }
+  }
+
+  .tableScrollArea {
+    @include ultra-thin-scrollbar;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  .diagnosticTable {
+    @include no-wrap-data-table;
+
+    .rowRef {
+      td {
+        border-bottom: 1px dashed rgba($border-panel, 0.6);
+      }
+    }
+
+    .channelTag {
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 1px 5px;
+      border-radius: 2px;
+      text-transform: uppercase;
+
+      &.refTag {
+        background: rgba($trace-reference, 0.15);
+        color: $trace-reference;
+        border: 1px solid rgba($trace-reference, 0.3);
+      }
+
+      &.targetTag {
+        background: rgba($trace-target, 0.15);
+        color: $trace-target;
+        border: 1px solid rgba($trace-target, 0.3);
+      }
+    }
+
+    .barContainer {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 6px;
+
+      .miniBar {
+        width: 36px;
+        height: 6px;
+        background: $bg-primary;
+        border-radius: 1px;
+        overflow: hidden;
+        border: 1px solid $border-panel;
+
+        .miniBarFill {
+          height: 100%;
+
+          &.throttle {
+            background-color: $channel-throttle;
+          }
+
+          &.brake {
+            background-color: $channel-brake;
+          }
+        }
+      }
+    }
+
+    .deltaCell {
+      font-weight: 700;
+
+      &.slower {
+        color: $status-slower;
+      }
+
+      &.faster {
+        color: $status-faster;
+      }
+    }
+  }
+}

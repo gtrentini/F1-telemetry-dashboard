@@ -1,0 +1,108 @@
+@use 'sass:color';
+@use './variables' as *;
+
+// Panel framing mixin: Structural borders, subtle shadow, and technical header/body styling
+@mixin panel-frame {
+  background: $bg-panel;
+  border: 1px solid $border-panel;
+  border-radius: $border-radius-md;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+// Compact telemetry readout container
+@mixin telemetry-readout {
+  display: inline-flex;
+  flex-direction: column;
+  padding: 4px 10px;
+  background: $bg-panel-subtle;
+  border: 1px solid $border-panel;
+  border-radius: $border-radius-sm;
+
+  .readout-label {
+    font-family: $font-sans;
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: $text-secondary;
+    line-height: 1;
+    margin-bottom: 3px;
+  }
+
+  .readout-value {
+    font-family: $font-mono;
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.1;
+    color: $text-primary;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+// Ultra-thin high-density custom scrollbar for telemetry logs and tabular views
+@mixin ultra-thin-scrollbar {
+  &::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $bg-primary;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $border-panel;
+    border-radius: 2px;
+
+    &:hover {
+      background: color.adjust($border-panel, $lightness: 12%);
+    }
+  }
+
+  // Firefox scrollbar styling
+  scrollbar-width: thin;
+  scrollbar-color: $border-panel $bg-primary;
+}
+
+// Engineering no-wrap data table styling
+@mixin no-wrap-data-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-family: $font-mono;
+  font-size: 0.75rem;
+
+  th,
+  td {
+    white-space: nowrap;
+    padding: 6px 12px;
+    text-align: right;
+    border-bottom: 1px solid $border-subtle;
+    font-variant-numeric: tabular-nums;
+
+    &:first-child {
+      text-align: left;
+    }
+  }
+
+  th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background: $bg-panel-subtle;
+    font-family: $font-sans;
+    font-weight: 600;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: $text-secondary;
+    border-bottom: 1px solid $border-panel;
+  }
+
+  tr:hover td {
+    background: $bg-hover;
+  }
+}

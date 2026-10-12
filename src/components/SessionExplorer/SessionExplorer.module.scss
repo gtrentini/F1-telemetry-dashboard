@@ -1,0 +1,399 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.explorerBackdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+}
+
+.explorerModal {
+  @include panel-frame;
+  width: 100%;
+  max-width: 680px;
+  background: $bg-panel;
+  border: 1px solid $border-panel;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.95);
+  animation: modalScaleIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  margin: 0;
+  max-height: calc(100vh - 3rem);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+@keyframes modalScaleIn {
+  from {
+    transform: scale(0.96);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.modalHeader {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  background: $bg-panel-subtle;
+  border-bottom: 1px solid $border-panel;
+
+  .headerTitleGroup {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    .modalTitle {
+      font-size: 0.88rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: $text-primary;
+    }
+
+    .apiBadge {
+      font-family: $font-mono;
+      font-size: 0.62rem;
+      font-weight: 600;
+      padding: 2px 6px;
+      background: rgba($trace-reference, 0.1);
+      color: $trace-reference;
+      border: 1px solid rgba($trace-reference, 0.25);
+      border-radius: $border-radius-sm;
+    }
+  }
+
+  .closeBtn {
+    background: none;
+    border: none;
+    color: $text-secondary;
+    font-size: 1.2rem;
+    cursor: pointer;
+    line-height: 1;
+
+    &:hover {
+      color: $text-highlight;
+    }
+  }
+}
+
+.modalBody {
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  @include ultra-thin-scrollbar;
+}
+
+.quickLaunchBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: rgba($trace-reference, 0.04);
+  border: 1px solid rgba($trace-reference, 0.2);
+  border-radius: $border-radius-sm;
+
+  .quickLaunchText {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+
+    .quickTitle {
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: $text-highlight;
+    }
+
+    .quickSub {
+      font-size: 0.65rem;
+      color: $text-secondary;
+      font-family: $font-mono;
+    }
+  }
+
+  .instantBtn {
+    padding: 6px 14px;
+    background: rgba($trace-reference, 0.15);
+    border: 1px solid rgba($trace-reference, 0.4);
+    border-radius: $border-radius-sm;
+    color: $trace-reference;
+    font-family: $font-sans;
+    font-size: 0.72rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s ease;
+
+    &:hover {
+      background: rgba($trace-reference, 0.25);
+      box-shadow: 0 0 10px rgba($trace-reference, 0.4);
+    }
+  }
+}
+
+.filterGrid {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1.5fr;
+  gap: 12px;
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.formField {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: $text-secondary;
+  }
+
+  select {
+    width: 100%;
+    appearance: none;
+    background: $bg-panel-subtle;
+    border: 1px solid $border-panel;
+    border-radius: $border-radius-sm;
+    color: $text-primary;
+    font-family: $font-sans;
+    font-size: 0.76rem;
+    font-weight: 600;
+    padding: 7px 28px 7px 10px;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%238b949e' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    transition: border-color 0.15s ease;
+
+    &:hover, &:focus {
+      border-color: rgba($trace-reference, 0.4);
+      outline: none;
+      background-color: $bg-hover;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.driverSelectionSection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 14px;
+  background: $bg-panel-subtle;
+  border: 1px solid $border-subtle;
+  border-radius: $border-radius-sm;
+
+  .sectionTitle {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: $text-secondary;
+  }
+
+  .driversRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+
+    @media (max-width: 600px) {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+.driverCardPreview {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  background: $bg-panel;
+  border: 1px solid $border-panel;
+  border-radius: $border-radius-sm;
+  margin-top: 6px;
+
+  .teamColorSwatch {
+    width: 6px;
+    height: 32px;
+    border-radius: 2px;
+  }
+
+  .driverInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    overflow: hidden;
+
+    .nameCode {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+
+      .codeBadge {
+        font-family: $font-mono;
+        font-size: 0.72rem;
+        font-weight: 700;
+        color: $text-highlight;
+      }
+
+      .numBadge {
+        font-family: $font-mono;
+        font-size: 0.65rem;
+        color: $text-secondary;
+      }
+    }
+
+    .teamText {
+      font-size: 0.65rem;
+      color: $text-muted;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+  }
+}
+
+.statusBanner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: $border-radius-sm;
+  font-family: $font-mono;
+  font-size: 0.72rem;
+
+  &.loading {
+    background: rgba($trace-reference, 0.1);
+    border: 1px solid rgba($trace-reference, 0.3);
+    color: $trace-reference;
+
+    .spinner {
+      width: 14px;
+      height: 14px;
+      border: 2px solid rgba($trace-reference, 0.3);
+      border-top-color: $trace-reference;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+  }
+
+  &.error {
+    background: rgba($channel-brake, 0.12);
+    border: 1px solid rgba($channel-brake, 0.3);
+    color: $channel-brake;
+
+    .errorContent {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 100%;
+
+      .errorActionBtn {
+        align-self: flex-start;
+        padding: 5px 12px;
+        background: rgba($trace-reference, 0.15);
+        border: 1px solid rgba($trace-reference, 0.4);
+        border-radius: $border-radius-sm;
+        color: $trace-reference;
+        font-family: $font-sans;
+        font-size: 0.72rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.15s ease;
+
+        &:hover {
+          background: rgba($trace-reference, 0.25);
+          box-shadow: 0 0 8px rgba($trace-reference, 0.3);
+        }
+      }
+    }
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.modalFooter {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  background: $bg-panel-subtle;
+  border-top: 1px solid $border-panel;
+
+  .footerInfo {
+    font-family: $font-mono;
+    font-size: 0.68rem;
+    color: $text-muted;
+  }
+
+  .actionButtons {
+    display: flex;
+    gap: 10px;
+
+    .cancelBtn {
+      padding: 6px 14px;
+      background: $bg-panel;
+      border: 1px solid $border-panel;
+      border-radius: $border-radius-sm;
+      color: $text-secondary;
+      font-family: $font-sans;
+      font-size: 0.74rem;
+      font-weight: 600;
+      cursor: pointer;
+
+      &:hover {
+        background: $bg-hover;
+        color: $text-primary;
+      }
+    }
+
+    .loadBtn {
+      padding: 6px 18px;
+      background: rgba($trace-reference, 0.15);
+      border: 1px solid rgba($trace-reference, 0.4);
+      border-radius: $border-radius-sm;
+      color: $trace-reference;
+      font-family: $font-sans;
+      font-size: 0.74rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s ease;
+
+      &:hover:not(:disabled) {
+        background: rgba($trace-reference, 0.25);
+        box-shadow: 0 0 10px rgba($trace-reference, 0.35);
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+  }
+}

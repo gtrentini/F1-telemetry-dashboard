@@ -1,0 +1,237 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.selectorContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.selectorDropdown {
+  appearance: none;
+  background: $bg-panel-subtle;
+  border: 1px solid $border-panel;
+  border-radius: $border-radius-sm;
+  color: $text-primary;
+  font-family: $font-sans;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 5px 28px 5px 10px;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%238b949e' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  transition: all 0.15s ease;
+
+  &:hover, &:focus {
+    border-color: rgba($trace-reference, 0.4);
+    outline: none;
+    background-color: $bg-hover;
+  }
+}
+
+.explorerTriggerBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  background: rgba($trace-reference, 0.12);
+  border: 1px solid rgba($trace-reference, 0.35);
+  border-radius: $border-radius-sm;
+  color: $trace-reference;
+  font-family: $font-sans;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background: rgba($trace-reference, 0.22);
+    border-color: rgba($trace-reference, 0.55);
+    box-shadow: 0 0 10px rgba($trace-reference, 0.35);
+  }
+
+  .globeIcon {
+    font-size: 0.8rem;
+    line-height: 1;
+  }
+}
+
+.importBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  background: rgba($trace-delta, 0.1);
+  border: 1px solid rgba($trace-delta, 0.3);
+  border-radius: $border-radius-sm;
+  color: $trace-delta;
+  font-family: $font-sans;
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background: rgba($trace-delta, 0.2);
+    border-color: rgba($trace-delta, 0.5);
+    box-shadow: 0 0 8px rgba($trace-delta, 0.3);
+  }
+
+  .uploadIcon {
+    font-size: 0.78rem;
+    line-height: 1;
+  }
+}
+
+// Modal Backdrop & Dropzone
+.modalBackdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+}
+
+.modalContent {
+  @include panel-frame;
+  width: 100%;
+  max-width: 520px;
+  background: $bg-panel;
+  border: 1px solid $border-panel;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.95);
+  animation: scaleIn 0.2s ease-out;
+  margin: 0;
+  max-height: calc(100vh - 3rem);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  .modalHeader {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 18px;
+    background: $bg-panel-subtle;
+    border-bottom: 1px solid $border-panel;
+
+    .modalTitle {
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: $text-primary;
+    }
+
+    .closeBtn {
+      background: none;
+      border: none;
+      color: $text-secondary;
+      font-size: 1.1rem;
+      cursor: pointer;
+      line-height: 1;
+
+      &:hover {
+        color: $text-highlight;
+      }
+    }
+  }
+
+  .modalBody {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow-y: auto;
+    @include ultra-thin-scrollbar;
+  }
+
+  .dropzone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 20px;
+    background: $bg-primary;
+    border: 2px dashed $border-panel;
+    border-radius: $border-radius-md;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.15s ease;
+
+    &:hover, &.dragActive {
+      border-color: $trace-reference;
+      background: rgba($trace-reference, 0.04);
+    }
+
+    .dropzoneIcon {
+      font-size: 1.8rem;
+      margin-bottom: 8px;
+    }
+
+    .dropzoneText {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: $text-primary;
+      margin-bottom: 4px;
+    }
+
+    .dropzoneSub {
+      font-size: 0.68rem;
+      color: $text-secondary;
+      font-family: $font-mono;
+    }
+  }
+
+  .errorBanner {
+    padding: 8px 12px;
+    background: rgba($channel-brake, 0.15);
+    border: 1px solid rgba($channel-brake, 0.35);
+    border-radius: $border-radius-sm;
+    color: $channel-brake;
+    font-size: 0.72rem;
+    font-family: $font-mono;
+  }
+
+  .modalFooter {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: flex-end;
+    padding: 12px 18px;
+    background: $bg-panel-subtle;
+    border-top: 1px solid $border-panel;
+    gap: 10px;
+
+    .cancelBtn {
+      padding: 6px 14px;
+      background: $bg-panel;
+      border: 1px solid $border-panel;
+      border-radius: $border-radius-sm;
+      color: $text-secondary;
+      font-size: 0.72rem;
+      font-weight: 600;
+      cursor: pointer;
+
+      &:hover {
+        background: $bg-hover;
+        color: $text-primary;
+      }
+    }
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
